@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>App Gasolina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+    }
+
+    .container {
+      background: white;
+      color: #333;
+      padding: 30px;
+      border-radius: 15px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2a5298;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1e3c72;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .etanol {
+      color: green;
+    }
+
+    .gasolina {
+      color: red;
+    }
+
+    .erro {
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>⛽ App Gasolina</h1>
+
+    <input type="number" id="gasolina" placeholder="Preço da Gasolina (R$)" step="0.01">
+    <input type="number" id="etanol" placeholder="Preço do Etanol (R$)" step="0.01">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      let gasolina = parseFloat(document.getElementById("gasolina").value);
+      let etanol = parseFloat(document.getElementById("etanol").value);
+      let resultado = document.getElementById("resultado");
+
+      if (isNaN(gasolina) || isNaN(etanol) || gasolina <= 0 || etanol <= 0) {
+        resultado.innerHTML = "⚠️ Digite valores válidos!";
+        resultado.className = "resultado erro";
+        return;
+      }
+
+      let calculo = etanol / gasolina;
+
+      if (calculo < 0.7) {
+        resultado.innerHTML = "✅ Melhor usar ETANOL";
+        resultado.className = "resultado etanol";
+      } else {
+        resultado.innerHTML = "⛽ Melhor usar GASOLINA";
+        resultado.className = "resultado gasolina";
+      }
+    }
+  </script>
+
+</body>
+</html>
